@@ -143,8 +143,10 @@ function setupMonitor(){
         say("Washing never started! Still waiting");
     };
 
-    config.onWashingMovement = function(washingDurationMinutes) {
+    config.onWashingMovement = function(washingDurationMinutes, x, y, z, time) {
         txtStatus.SetText("Washing for " + washingDurationMinutes + "mins...");
+        say("o");
+        //sendRequest("Washing movement: x="+x + ", y="+y + ", z="+z);
     }
 
     config.onFinished = function(washingDurationMinutes) {
@@ -158,7 +160,7 @@ function setupMonitor(){
         say("Remember, remember the clothes!");
     };
 
-    config.onPersonMovement = function() {
+    config.onPersonMovement = function(x, y, z, time) {
         btnStart.SetVisibility("Show");
         btnStop.SetVisibility("Hide");
 
@@ -167,11 +169,13 @@ function setupMonitor(){
         say("Enjoy. You fucking moolo!");
     }
 
+    /*
     // Logs all the events, just for testing
     config.onEvent = function (eventType, params){
         console.log(eventType);
         console.log(JSON.stringify(params));
     };
+    */
 
     monitor = washingMonitor.init(config);
 
